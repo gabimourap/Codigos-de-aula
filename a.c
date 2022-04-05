@@ -1,14 +1,17 @@
 #include <stdio.h>
+#include <math.h>
 
-int main(int argc, const char * argv[]) {
-    float altura, base, area;
+int main () {
 
-    printf("Informe a altura e a base do triângulo\n");
-    scanf("%f %f", &altura, &base);
+    float lado, area;
 
-    area = (altura * base)/2;
+   printf("Informe o lado do quadrado\n*");
+   scanf("%f", &lado);
 
-    printf("A área do triângulo é: %.2f\n", area);
+   area = (lado * lado);
 
-    return 0;
-}
+   printf("A area do quadrado e: %f \n*", area);
+
+   return 0;
+
+ }
