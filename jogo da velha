@@ -9,7 +9,7 @@ int main()
     int i, j, k=0, c=0; // introdução das variáveis, i corresponde às linhas da matriz, j corresponde às colunas, k e c foram usados para definir se uma jogada é válida ou não.
     
     //definição de cada componente da matriz
-    for (i=0; i <= 3; i++){ //definindo que cada elemento da matriz 3x3, na qual serão colocados os X e O, são _ 
+    for (i=0; i <= 3; i++){ //definindo que cada elemento da matriz 4x4 , na qual serão colocados os X e O, são _ 
         for(j=0; j<=3; j++){
           m[i][j] = '_'; 
         }
