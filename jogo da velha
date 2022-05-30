@@ -1,0 +1,151 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+int main()
+{
+    setlocale(LC_ALL, "portuguese"); //comando para inserção de acentuação 
+    char m[4][4], e, f; // definição do tamanho da matriz, sendo 3x3 para o jogo e a quarta linha e coluna para descrições, "e" está definido como o símbolo do jogador 1 e "f" como o símboo do jogador 2
+    int i, j, k=0, c=0; // introdução das variáveis, i corresponde às linhas da matriz, j corresponde às colunas, k e c foram usados para definir se uma jogada é válida ou não.
+    
+    //definição de cada componente da matriz
+    for (i=0; i <= 3; i++){ //definindo que cada elemento da matriz 3x3, na qual serão colocados os X e O, são _ 
+        for(j=0; j<=3; j++){
+          m[i][j] = '_'; 
+        }
+    }
+    //descrição das coordenadas da matriz, que serão a primeira linha e a primeira coluna
+    m[0][0] = '+';
+    m[0][1] = '1';
+    m[0][2] = '2';
+    m[0][3] = '3';
+    m[1][0] = '1';
+    m[2][0] = '2';
+    m[3][0] = '3';
+
+    printf("Jogo da velha\n"); // comando para printar o nome do jogo
+    printf("\nInstruções: Cada jogador escolhe uma linha e depois uma coluna para colocar seu símbolo.\nO objetivo do jogo é formar uma linha, coluna ou diagonal somente com seu símbolo.\nCaso tente inserir um símbolo em um lugar já ocupado, a jogada será invalidada e o jogador deverá escolher novamente uma linha e coluna.\n"); // instruções de como jogar
+    //Impressão da matriz
+    for (i=0; i <= 3; i++){ //utiliza uma variável para controlar a contagem do loop, bem como seu incremento
+        for(j=0; j<=3; j++){ //utiliza uma variável para controlar a contagem do loop, bem como seu incremento
+        printf("%c ", m[i][j]); //imrpime a matriz
+}
+        printf("\n"); //quebra de linha
+
+}
+
+    printf("\nJogador 1 escolha seu símbolo\n"); //printando para o primeiro jogador escolher um símbolo
+    scanf(" %c", &e); //lendo o símbolo que o jogador escolheu, sendo 'e' o símbolo do jogador 1 
+    while(e != 'x' && e!= 'X' && e!= 'o' && e!= 'O'){ //condição de escolha de símbolo - define quais símbolos não podem ser escolhidos, que são aqueles diferentes de x, X, o e O. Tal comando será repetido até que o jogador escolha um símbolo válido.
+        printf("Por favor, escolha somente X ou O\n"); //enquanto a condição acima foi verdadeira, essa mensagem será imprimida
+        scanf(" %c", &e); //lendo os novos símbolos introduzidos
+    }
+
+    printf("\nJogador 2 escolha seu símbolo\n"); //printando para o segundo jogador escolher o símbolo
+    scanf(" %c", &f); //lendo o símbolo escolhido, sendo que f foi definido como o símbolo do jogador 2
+    while((f == e) || (f != 'x' && f!= 'X' && f!= 'o' && f!= 'O')){ //condição para a escolha do segundo símbolo - define os símbolos que não podem ser escolhidos, assim como a condição acima, além de não permitir que o jogador escolha o mesmo símbolo que o jogador 1.
+        printf("Por favor, escolha somente o símbolo (X ou O) não selecionado pelo jogador 1\n"); //enquanto a condição acima foi verdadeira, essa mensagem será imprimida
+        scanf(" %c", &f); //lendo os novos símbolos
+    }
+    //definindo que, caso o jogador tenha selecionado um símbolo em letra minúscula, ao ser impresso na matriz, o símbolo ficará em maiúsculo.
+    if (e== 'x'){ 
+        e='X';
+        f='O';
+    }
+    if (e== 'o'){
+        e='O';
+        f='X';
+    }
+
+
+   while(c < 8){ //condição que define que enquanto a matriz não estiver completa por símbolos, ops seguintes comandos devem ser executados
+
+    while(k==0){
+    printf("\nInsira uma linha\n"); //impressão da mensagem pedindo para o jogador escolher uma linha
+    scanf("%i", &i); //leitura da linha escolhida
+    printf("\nInsira uma coluna\n"); //impressão da mensagem pedindo para o jogador escolher uma coluna
+    scanf("%i", &j); //leitura da coluna escolhida
+    if (m[i][j] != '_'){ //condição para o caso da coordenada escolhida já estar ocupada
+        printf("\nJogada Inválida, já tem um símbolo na posição inserida\n"); //imprimir a mensagem de jogada inválida
+    }
+    else //caso a condição if não seja verdadeira o seguinte comando será executado
+    {
+        k++; //incremento que aumenta em 1 o valor da variável que ele está acompanhando
+    }
+    }
+    m[i][j] = e; //valor atribuído a matriz
+     for (i=0; i <= 3; i++){ //utiliza uma variável para controlar a contagem do loop, bem como seu incremento
+        for(j=0; j<=3; j++){ //utiliza uma variável para controlar a contagem do loop, bem como seu incremento
+        printf("%c ", m[i][j]); //imrpime a matriz com o símbolo do jogador na coordenada escolhida por ele
+}
+        printf("\n"); //pular linha 
+}
+  c++; // incremento que aumenta em 1 o valor da variável que ele está acompanhando
+    k = 0; // valor atribuído a variável
+    if((m[1][1]== e && m[1][2]==e && m[1][3]==e)||(m[1][1]==e && m[2][1]==e && m[3][1]==e)||(m[1][1]==e && m[2][2]==e && m[3][3]==e)||(m[2][2]==e && m[1][2]==e && m[3][2]==e)||(m[2][1]==e && m[2][2]==e && m[2][3]==e)||(m[3][1]==e && m[3][2]==e && m[3][3]==e)||(m[1][3]==e && m[2][2]==e && m[3][1]==e)||(m[1][3]==e && m[2][3]==e && m[3][3]==e)){ // define se a condição é verdadeira para ser executada
+        printf("Jogador %c venceu", e); // comando que aparece no código para mostrar qual jogador venceu
+        return 0; // programa finaliza a terefa
+    }
+
+
+    while(k==0){ // comando de execução das instruções que vai continuar até que uma condição seja verdadeira
+    printf("\nInsira uma linha\n"); // comando que aparece no código para inserir uma linha no jogo
+    scanf("%i", &i); // lê a linha inserida
+    printf("\nInsira uma coluna\n"); // comando que aparece no código para inserir uma coluna no jogo
+    scanf("%i", &j); // lê a coluna inserida
+    if (m[i][j] != '_'){ // define se a condição é verdadeira para ser executada
+        printf("\nJogada Inválida, já tem um símbolo na posição inserida\n"); // comando que aparece no código para mostrar que não pode inserir um símbolo na posição escolhida, já que tem outro no lugar
+    }
+    else // se a condição for verdadeira, o bloco que forma o destino de if será executado, caso contrário o bloco que forma o destino de else será executado
+    {
+        k++; // incremento que aumenta em 1 o valor da variável que ele está acompanhando
+    }
+    }
+    m[i][j] = f; // valor atribuído a matriz
+     for (i=0; i <= 3; i++){ // utiliza uma variável para controlar a contagem do loop, bem como seu incremento
+        for(j=0; j<=3; j++){ // utiliza uma variável para controlar a contagem do loop, bem como seu incremento
+        printf("%c ", m[i][j]); // comando que aparece no código com a matriz
+}
+        printf("\n"); // pular linha
+}
+    c++; // incremento que aumenta em 1 o valor da variável que ele está acompanhando
+    k = 0; // valor atribuído a variável
+    if((m[1][1]==f && m[1][2]==f && m[1][3]==f)||(m[1][1]==f && m[2][1]==f && m[3][1]==f)||(m[1][1]==f && m[2][2]==f && m[3][3]==f)||(m[2][2]==f && m[1][2]==f && m[3][2]==f)||(m[2][1]==f && m[2][2]==f && m[2][3]==f)||(m[3][1]==f && m[3][2]==f && m[3][3]==f)||(m[1][3]==f && m[2][2]==f && m[3][1]==f)||(m[1][3]==f && m[2][3]==f && m[3][3]==f)){ // define se a condição é verdadeira para ser executada
+        printf("Jogador %c venceu", f); // comando que aparece no código para mostrar qual jogador venceu
+        return 0; // programa finaliza a terefa
+    }
+
+
+}
+
+     while(k==0){ // comando de execução das instruções que vai continuar até que uma condição seja verdadeira
+    printf("\nInsira uma linha\n"); // comando que aparece no código para inserir uma linha no jogo
+    scanf("%i", &i); // lê a linha inserida
+    printf("\nInsira uma coluna\n"); // comando que aparece no código para inserir uma coluna no jogo
+    scanf("%i", &j); // lê a coluna inserida
+    if (m[i][j] != '_'){ // define se a condição é verdadeira para ser executada
+        printf("\nJogada Inválida, já tem um símbolo na posição inserida\n"); // comando que aparece no código para mostrar que não pode inserir um símbolo na posição escolhida, já que tem outro no lugar
+    }
+    else // se a condição for verdadeira, o bloco que forma o destino de if será executado, caso contrário o bloco que forma o destino de else será executado
+    {
+        k++; // incremento que aumenta em 1 o valor da variável que ele está acompanhando
+    }
+    }
+    m[i][j] = e; // valor atribuído a matriz
+     for (i=0; i <= 3; i++){ // utiliza uma variável para controlar a contagem do loop, bem como seu incremento
+        for(j=0; j<=3; j++){ // utiliza uma variável para controlar a contagem do loop, bem como seu incremento
+        printf("%c ", m[i][j]); // comando que aparece no código com a matriz
+}
+        printf("\n"); // pular linha
+}
+     if((m[1][1]==e && m[1][2]==e && m[1][3]==e)||(m[1][1]==e && m[2][1]==e && m[3][1]==e)||(m[1][1]==e && m[2][2]==e && m[3][3]==e)||(m[2][2]==e && m[1][2]==e && m[3][2]==e)||(m[2][1]==e && m[2][2]==e && m[2][3]==e)||(m[3][1]==e && m[3][2]==e && m[3][3]==e)||(m[1][3]==e && m[2][2]==e && m[3][1]==e)||(m[1][3]==e && m[2][3]==e && m[3][3]==e)){ // define se a condição é verdadeira para ser executada
+        printf("Jogador X venceu"); // comando que aparece no código para mostrar qual jogador venceu
+        return 0; // programa finaliza a terefa
+    }
+
+
+
+    printf("\nDeu velha\n"); // comando que aparece no código para mostrar que o jogo deu empate
+    return 0; // fim do programa
+
+}
