@@ -48,11 +48,11 @@ int main()
         scanf(" %c", &f); //lendo os novos símbolos
     }
     //definindo que, caso o jogador tenha selecionado um símbolo em letra minúscula, ao ser impresso na matriz, o símbolo ficará em maiúsculo.
-    if (e== 'x'){ 
+    if ((e== 'x') || (e== 'X')){ 
         e='X';
         f='O';
     }
-    if (e== 'o'){
+    if (e== 'o' || (e== 'O')){
         e='O';
         f='X';
     }
